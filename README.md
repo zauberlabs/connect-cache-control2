@@ -1,4 +1,4 @@
-# cache-control
+# connect-cache-control2
 
 Connect Middleware to handle cache control with ease
 
@@ -7,7 +7,7 @@ Connect Middleware to handle cache control with ease
 To use use the middleware just import the `withCacheControl` function and create a middleware for the routes or routes you want.
 
 ```javascript
-const withCacheControl = require('cache-control').withCacheControl;
+const withCacheControl = require('connect-cache-control2').withCacheControl;
 
 app.get('/some-path',
   withCacheControl({maxAge: 2, unit: 'hours', private: true}),
@@ -32,7 +32,7 @@ If you just need to generate a 'Cache-Control' valid value, you can use `toCache
 Just do:
 
 ```javascript
-const toCacheControl = require('cache-control').toCacheControl;
+const toCacheControl = require('connect-cache-control2').toCacheControl;
 
 app.get('/some-path',
   function (req, res) {
