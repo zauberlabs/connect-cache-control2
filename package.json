@@ -1,0 +1,21 @@
+{
+  "name": "cache-control",
+  "version": "1.0.0",
+  "description": "Connect Middleware to handle cache control with ease",
+  "main": "index.js",
+  "engines": {
+    "node": ">= 4.0.0"
+  },
+  "scripts": {
+    "test": "mocha tests.js"
+  },
+  "keywords": [
+    "express",
+    "connect",
+    "middleware",
+    "cache",
+    "cache-control"
+  ],
+  "author": "Mariano Cortesi <mcortesi@gmail.com>",
+  "license": "ISC"
+}
