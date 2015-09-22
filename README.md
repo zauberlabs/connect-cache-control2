@@ -21,7 +21,7 @@ The possible options to pass are:
  * `private`: Set to true to use 'private' if not will be 'public'
  * `maxAge`: Set the amount to use for max-age. The unit is seconds unless unit is defined.
  * `unit`: One of 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'.
- * `noStore': set 'no-store' if true
+ * `noStore`: set 'no-store' if true
  * `noCache`: set 'no-cache' if true
  * `mustRevalidate`: set 'must-revalidate' if true
 
@@ -37,6 +37,6 @@ const toCacheControl = require('cache-control').toCacheControl;
 app.get('/some-path',
   function (req, res) {
     // do your thing..
-    res.header('Cache-Control', toCacheControl({maxAge: 2, unit: 'hours', private: true}));
+    res.set('Cache-Control', toCacheControl({maxAge: 2, unit: 'hours', private: true}));
   });
 ```

@@ -9,7 +9,7 @@ class ResponseMock {
     this.headers = {};
   }
 
-  header(key, value) {
+  set(key, value) {
     this.headers[key] = value;
   }
 }

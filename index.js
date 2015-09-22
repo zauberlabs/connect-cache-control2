@@ -45,7 +45,7 @@ function toCacheControl(options) {
 function withCacheControl(options) {
   const headerValue = toCacheControl(options);
   return function(req, res, next) {
-    res.header('Cache-Control', headerValue);
+    res.set('Cache-Control', headerValue);
     next();
   }
 }
