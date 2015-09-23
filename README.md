@@ -25,6 +25,8 @@ The possible options to pass are:
  * `noCache`: set 'no-cache' if true
  * `mustRevalidate`: set 'must-revalidate' if true
 
+To understand what each option means, you can check: [Beginners Guide to HTTP Cache Headers](http://www.mobify.com/blog/beginners-guide-to-http-cache-headers/)
+
 ### Without the Middleware
 
 If you just need to generate a 'Cache-Control' valid value, you can use `toCacheControl(options)` function.
