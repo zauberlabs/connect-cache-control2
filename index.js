@@ -24,7 +24,7 @@ function toCacheControl(options) {
 
   if (options.maxAge) {
     const maxAgeInSeconds = toSeconds(options.maxAge, options.unit || 'seconds');
-    headerValue += ', max-age= ' + maxAgeInSeconds;
+    headerValue += ', max-age=' + maxAgeInSeconds;
   }
 
   if (options.noCache) {
