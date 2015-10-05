@@ -1,6 +1,6 @@
 {
   "name": "connect-cache-control2",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Connect Middleware to handle cache control with ease",
   "main": "index.js",
   "engines": {
