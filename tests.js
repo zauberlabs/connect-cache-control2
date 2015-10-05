@@ -30,20 +30,20 @@ describe('cache-control', function() {
 
   it('should use seconds unit by default', (done) => {
     cacheControl.withCacheControl({maxAge: 10})(null, res, () => {
-      expect(res.headers).to.include.property('Cache-Control', 'public, max-age= 10');
+      expect(res.headers).to.include.property('Cache-Control', 'public, max-age=10');
       done();
     });
   });
 
   it('should support other units', (done) => {
-    cacheControl.withCacheControl({maxAge: 10, unit: 'hours'})(null, res, () => {
-      expect(res.headers).to.include.property('Cache-Control', 'public, max-age= 36000');
+    cacheControl.withCacheControl({maxAge: '10 hours'})(null, res, () => {
+      expect(res.headers).to.include.property('Cache-Control', 'public, max-age=36000');
       done();
     });
   });
 
   it('should fail if an invalid unit is used', () => {
-    expect(() => cacheControl.withCacheControl({maxAge:1, unit:'hour'}))
+    expect(() => cacheControl.withCacheControl({maxAge: '1 cono'}))
       .to.throw(Error);
   });
 
@@ -70,7 +70,7 @@ describe('cache-control', function() {
 
   it('should accept private option', (done) => {
     cacheControl.withCacheControl({private: true, maxAge: 10})(null, res, () => {
-      expect(res.headers).to.include.property('Cache-Control', 'private, max-age= 10');
+      expect(res.headers).to.include.property('Cache-Control', 'private, max-age=10');
       done();
     });
   });

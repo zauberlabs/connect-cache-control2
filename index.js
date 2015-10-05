@@ -1,30 +1,19 @@
-
 'use strict';
 
-const UnitMultiplier = { };
-
-UnitMultiplier.seconds =  1;
-UnitMultiplier.minutes =  60 * UnitMultiplier.seconds;
-UnitMultiplier.hours   =  60 * UnitMultiplier.minutes;
-UnitMultiplier.days    =  24 * UnitMultiplier.hours;
-UnitMultiplier.weeks   =  7 * UnitMultiplier.days;
-UnitMultiplier.months  =  30 * UnitMultiplier.days;
-UnitMultiplier.years   =  365 * UnitMultiplier.days;
-
-function toSeconds(amount, unit) {
-  if (unit in UnitMultiplier) {
-    return UnitMultiplier[unit] * amount;
-  } else {
-    throw new Error('Invalidad Unit: ' + unit);
-  }
-}
+const ms = require('ms');
+const _ = require('lodash');
 
 function toCacheControl(options) {
   let headerValue = options.private? 'private': 'public';
 
-  if (options.maxAge) {
-    const maxAgeInSeconds = toSeconds(options.maxAge, options.unit || 'seconds');
-    headerValue += ', max-age=' + maxAgeInSeconds;
+  if (_.isNumber(options.maxAge)) {
+    headerValue += ', max-age=' + options.maxAge;
+  } else if (_.isString(options.maxAge)) {
+    let milliseconds = ms(options.maxAge);
+    if (_.isUndefined(milliseconds)) {
+      throw new Error(`Invalid unit for max-age: "${options.maxAge}"`)
+    }
+    headerValue += ', max-age=' + ( milliseconds / 1000);
   }
 
   if (options.noCache) {
@@ -52,5 +41,6 @@ function withCacheControl(options) {
 
 module.exports = {
   toCacheControl: toCacheControl,
-  withCacheControl: withCacheControl
+  withCacheControl: withCacheControl,
+  noCache: withCacheControl({noCache: true, mustRevalidate: true, maxAge: 0})
 }
