@@ -7,13 +7,13 @@ function toCacheControl(options) {
   let headerValue = options.private? 'private': 'public';
 
   if (_.isNumber(options.maxAge)) {
-    headerValue += ', max-age=' + options.maxAge;
+    headerValue += `, max-age=${options.maxAge}`;
   } else if (_.isString(options.maxAge)) {
-    let milliseconds = ms(options.maxAge);
+    const milliseconds = ms(options.maxAge);
     if (_.isUndefined(milliseconds)) {
-      throw new Error(`Invalid unit for max-age: "${options.maxAge}"`)
+      throw new Error(`Invalid unit for max-age: "${options.maxAge}"`);
     }
-    headerValue += ', max-age=' + ( milliseconds / 1000);
+    headerValue += `, max-age=${(milliseconds / 1000)}`;
   }
 
   if (options.noCache) {
@@ -33,14 +33,14 @@ function toCacheControl(options) {
 
 function withCacheControl(options) {
   const headerValue = toCacheControl(options);
-  return function(req, res, next) {
+  return function cacheControlMiddlware(req, res, next) {
     res.set('Cache-Control', headerValue);
     next();
-  }
+  };
 }
 
 module.exports = {
-  toCacheControl: toCacheControl,
-  withCacheControl: withCacheControl,
+  toCacheControl,
+  withCacheControl,
   noCache: withCacheControl({noCache: true, mustRevalidate: true, maxAge: 0})
-}
+};

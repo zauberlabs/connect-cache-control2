@@ -1,5 +1,8 @@
 'use strict';
 
+/* eslint-env mocha */
+/* eslint no-unused-expressions: 0, func-names: 0 */
+
 const cacheControl = require('./index');
 const chai = require('chai');
 const expect = chai.expect;
